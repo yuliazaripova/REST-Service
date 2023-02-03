@@ -39,6 +39,9 @@ export class UserService {
 
   async findOne(id: string) {
     const user = this.users.find((user) => user.id === id);
+    if (!user) {
+      throw new NotFoundException();
+    }
     return this.omitPassword(user);
   }
 
@@ -48,6 +51,7 @@ export class UserService {
     const user = this.users[index];
     if (user.password !== dto.oldPassword) throw new ForbiddenException();
     this.users[index] = { ...user, password: dto.newPassword };
+
     return this.omitPassword(user);
   }
 

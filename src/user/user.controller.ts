@@ -31,10 +31,7 @@ export class UserController {
 
   @Get(':id')
   async findOne(@Param('id', ParseUUIDPipe) id: string) {
-    const user = this.userService.findOne(id);
-    if (!user) {
-      throw new NotFoundException();
-    }
+    return this.userService.findOne(id);
   }
 
   @Put(':id')
@@ -44,6 +41,6 @@ export class UserController {
 
   @Delete(':id')
   async remove(@Param('id', ParseUUIDPipe) id: string) {
-    this.userService.remove(id);
+    return this.userService.remove(id);
   }
 }
