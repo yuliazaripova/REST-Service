@@ -3,12 +3,14 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
   Param,
   ParseUUIDPipe,
   Post,
   Put,
   Query,
 } from '@nestjs/common';
+import { UpdateTracktDto } from './dto/update-track.dto';
 import { TrackModel } from './track.model';
 import { TrackService } from './track.service';
 
@@ -31,11 +33,12 @@ export class TrackController {
   }
 
   @Put(':id')
-  async update(@Param('id') id: string, @Body() dto: Omit<TrackModel, 'id'>) {
+  async update(@Param('id', ParseUUIDPipe) id: string, @Body() dto: UpdateTracktDto) {
     return this.trackService.update(id, dto);
   }
 
   @Delete(':id')
+  @HttpCode(204)
   async remove(@Param('id', ParseUUIDPipe) id: string) {
     return this.trackService.remove(id);
   }

@@ -1,6 +1,18 @@
-import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Post, Put, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  Param,
+  ParseUUIDPipe,
+  Post,
+  Put,
+  Query,
+} from '@nestjs/common';
 import { ArtistModel } from './artist.model';
 import { ArtistService } from './artist.service';
+import { UpdateArtistDto } from './dto/update-artist.dto';
 
 @Controller('artist')
 export class ArtistController {
@@ -21,11 +33,15 @@ export class ArtistController {
   }
 
   @Put(':id')
-  async update(@Param('id') id: string, @Body() dto: Omit<ArtistModel, 'id'>) {
+  async update(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() dto: UpdateArtistDto,
+  ) {
     return this.artistService.update(id, dto);
   }
 
   @Delete(':id')
+  @HttpCode(204)
   async remove(@Param('id', ParseUUIDPipe) id: string) {
     return this.artistService.remove(id);
   }

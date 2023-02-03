@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
   Param,
   ParseUUIDPipe,
   Post,
@@ -11,6 +12,7 @@ import {
 } from '@nestjs/common';
 import { AlbumModel } from './album.model';
 import { AlbumService } from './album.service';
+import { UpdateAlbumDto } from './dto/update-album.dto';
 
 @Controller('album')
 export class AlbumController {
@@ -31,11 +33,12 @@ export class AlbumController {
   }
 
   @Put(':id')
-  async update(@Param('id') id: string, @Body() dto: Omit<AlbumModel, 'id'>) {
+  async update(@Param('id', ParseUUIDPipe) id: string, @Body() dto: UpdateAlbumDto) {
     return this.albumService.update(id, dto);
   }
 
   @Delete(':id')
+  @HttpCode(204)
   async remove(@Param('id', ParseUUIDPipe) id: string) {
     return this.albumService.remove(id);
   }

@@ -1,4 +1,5 @@
 import {
+  forwardRef,
   Inject,
   Injectable,
   NotFoundException,
@@ -6,16 +7,20 @@ import {
 } from '@nestjs/common';
 import { AlbumService } from 'src/album/album.service';
 import { ArtistService } from 'src/artist/artist.service';
+import { TrackModel } from 'src/track/track.model';
+import { TrackModule } from 'src/track/track.module';
 import { TrackService } from 'src/track/track.service';
 import { FavoritesModel } from './favorites.model';
 
 @Injectable()
 export class FavoritesService {
-  //   @Inject(ArtistService)
-  //   @Inject(TrackService)
-  //   @Inject(AlbumService)
-  private readonly artistService: ArtistService;
+  @Inject(forwardRef(() => TrackService))
   private readonly trackService: TrackService;
+
+  @Inject(forwardRef(() => ArtistService))
+  private readonly artistService: ArtistService;
+
+  @Inject(forwardRef(() => AlbumService))
   private readonly albumService: AlbumService;
 
   private readonly favs: FavoritesModel = {
@@ -33,9 +38,24 @@ export class FavoritesService {
         return this.albumService;
     }
   }
+  async remove(field: string, id: string) {
+    const arr = this.favs[`${field}s`];
+    const index = arr.findIndex((i) => i.id === id);
+    if (index === -1) throw new NotFoundException();
+    this.favs[`${field}s`].splice(index, 1);
+  }
+
+  async removeByDelete(field: string, id: string) {
+    const arr = this.favs[`${field}s`];
+    const index = arr.findIndex((i) => i.id === id);
+    if (index !== -1) this.favs[`${field}s`].splice(index, 1);
+  }
+
   async create(field: string, id: string) {
     const service = this.getService(field);
-    const item = service.findOne(id);
+
+    const items: any = await service.findAll();
+    const item = items.find((i) => i.id === id);
     if (!item) {
       throw new UnprocessableEntityException();
     }

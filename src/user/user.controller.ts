@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
   HttpException,
   HttpStatus,
   NotFoundException,
@@ -35,11 +36,12 @@ export class UserController {
   }
 
   @Put(':id')
-  async update(@Param('id') id: string, @Body() dto: UpdatePasswordDto) {
+  async update(@Param('id', ParseUUIDPipe) id: string, @Body() dto: UpdatePasswordDto) {
     return this.userService.update(id, dto);
   }
 
   @Delete(':id')
+  @HttpCode(204)
   async remove(@Param('id', ParseUUIDPipe) id: string) {
     return this.userService.remove(id);
   }

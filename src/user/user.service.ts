@@ -50,9 +50,15 @@ export class UserService {
     if (index === -1) throw new NotFoundException();
     const user = this.users[index];
     if (user.password !== dto.oldPassword) throw new ForbiddenException();
-    this.users[index] = { ...user, password: dto.newPassword };
+    const newUser = {
+      ...user,
+      updatedAt: Date.now(),
+      version: user.version + 1,
+      password: dto.newPassword,
+    };
+    this.users[index] = newUser;
 
-    return this.omitPassword(user);
+    return this.omitPassword(newUser);
   }
 
   async remove(id: string) {
