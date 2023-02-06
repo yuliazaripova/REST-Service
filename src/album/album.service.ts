@@ -53,7 +53,7 @@ export class AlbumService {
     if (index === -1) throw new NotFoundException();
     this.albums.splice(index, 1);
     this.trackService.clearField('albumId', id);
-    this.favoritesService.removeByDelete("album", id)
+    this.favoritesService.removeByDelete('album', id);
   }
 
   async clearArtist(id: string) {

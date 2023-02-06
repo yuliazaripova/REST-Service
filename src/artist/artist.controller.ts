@@ -8,7 +8,6 @@ import {
   ParseUUIDPipe,
   Post,
   Put,
-  Query,
 } from '@nestjs/common';
 import { ArtistModel } from './artist.model';
 import { ArtistService } from './artist.service';
@@ -19,17 +18,17 @@ export class ArtistController {
   constructor(private readonly artistService: ArtistService) {}
   @Post()
   async create(@Body() dto: ArtistModel) {
-    return this.artistService.create(dto);
+    return await this.artistService.create(dto);
   }
 
   @Get()
-  async findAll(@Query() query: any) {
-    return this.artistService.findAll();
+  async findAll() {
+    return await this.artistService.findAll();
   }
 
   @Get(':id')
   async findOne(@Param('id', ParseUUIDPipe) id: string) {
-    return this.artistService.findOne(id);
+    return await this.artistService.findOne(id);
   }
 
   @Put(':id')
@@ -37,12 +36,12 @@ export class ArtistController {
     @Param('id', ParseUUIDPipe) id: string,
     @Body() dto: UpdateArtistDto,
   ) {
-    return this.artistService.update(id, dto);
+    return await this.artistService.update(id, dto);
   }
 
   @Delete(':id')
   @HttpCode(204)
   async remove(@Param('id', ParseUUIDPipe) id: string) {
-    return this.artistService.remove(id);
+    return await this.artistService.remove(id);
   }
 }

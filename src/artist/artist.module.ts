@@ -8,6 +8,6 @@ import { FavoritesModule } from 'src/favorites/favorites.module';
   imports: [TrackModule, forwardRef(() => FavoritesModule)],
   providers: [ArtistService],
   controllers: [ArtistController],
-  exports: [ArtistService]
+  exports: [ArtistService],
 })
 export class ArtistModule {}

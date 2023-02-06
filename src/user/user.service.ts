@@ -12,11 +12,6 @@ import { UpdatePasswordDto } from './dto';
 export class UserService {
   private readonly users: UserModel[] = [];
 
-  private omitPassword(user: Partial<UserModel>) {
-    const { password, ...rest } = user;
-    return rest;
-  }
-
   async create(dto: CreateUserDto) {
     const { password, login } = dto;
     const user = {
@@ -28,13 +23,11 @@ export class UserService {
       updatedAt: Date.now(),
     };
     this.users.push(user);
-    return this.omitPassword(user);
+    return user;
   }
 
   async findAll() {
-    return this.users.map((user) => {
-      return this.omitPassword(user);
-    });
+    return this.users;
   }
 
   async findOne(id: string) {
@@ -42,7 +35,7 @@ export class UserService {
     if (!user) {
       throw new NotFoundException();
     }
-    return this.omitPassword(user);
+    return user;
   }
 
   async update(id: string, dto: UpdatePasswordDto) {
@@ -57,8 +50,7 @@ export class UserService {
       password: dto.newPassword,
     };
     this.users[index] = newUser;
-
-    return this.omitPassword(newUser);
+    return newUser;
   }
 
   async remove(id: string) {

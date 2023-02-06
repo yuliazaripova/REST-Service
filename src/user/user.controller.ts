@@ -1,43 +1,48 @@
 import {
   Body,
+  ClassSerializerInterceptor,
   Controller,
   Delete,
   Get,
   HttpCode,
-  HttpException,
-  HttpStatus,
-  NotFoundException,
   Param,
-  ParseIntPipe,
   ParseUUIDPipe,
   Post,
   Put,
-  Query,
+  UseInterceptors,
 } from '@nestjs/common';
 import { CreateUserDto, UpdatePasswordDto } from './dto';
+import { UserModel } from './user.model';
 import { UserService } from './user.service';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
+  @UseInterceptors(ClassSerializerInterceptor)
   @Post()
   async create(@Body() dto: CreateUserDto) {
-    return this.userService.create(dto);
+    return new UserModel(await this.userService.create(dto));
   }
 
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get()
-  async findAll(@Query() query: any) {
-    return this.userService.findAll();
+  async findAll() {
+    return (await this.userService.findAll()).map(
+      (user) => new UserModel(user),
+    );
   }
-
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get(':id')
   async findOne(@Param('id', ParseUUIDPipe) id: string) {
-    return this.userService.findOne(id);
+    return new UserModel(await this.userService.findOne(id));
   }
-
+  @UseInterceptors(ClassSerializerInterceptor)
   @Put(':id')
-  async update(@Param('id', ParseUUIDPipe) id: string, @Body() dto: UpdatePasswordDto) {
-    return this.userService.update(id, dto);
+  async update(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() dto: UpdatePasswordDto,
+  ) {
+    return new UserModel(await this.userService.update(id, dto));
   }
 
   @Delete(':id')

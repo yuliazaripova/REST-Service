@@ -8,8 +8,6 @@ import { AlbumModule } from './album/album.module';
 import { FavoritesModule } from './favorites/favorites.module';
 import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
-import { TrackService } from './track/track.service';
-import { FavoritesService } from './favorites/favorites.service';
 
 @Module({
   imports: [

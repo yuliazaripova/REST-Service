@@ -7,8 +7,6 @@ import {
 } from '@nestjs/common';
 import { AlbumService } from 'src/album/album.service';
 import { ArtistService } from 'src/artist/artist.service';
-import { TrackModel } from 'src/track/track.model';
-import { TrackModule } from 'src/track/track.module';
 import { TrackService } from 'src/track/track.service';
 import { FavoritesModel } from './favorites.model';
 
