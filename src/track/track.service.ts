@@ -11,8 +11,8 @@ import { FavoritesService } from 'src/favorites/favorites.service';
 @Injectable()
 export class TrackService {
   @Inject(forwardRef(() => FavoritesService))
-  // @Inject(FavoritesService)
   private readonly favoritesService: FavoritesService;
+
   private readonly tracks: TrackModel[] = [];
 
   async create(dto: TrackModel) {
@@ -40,7 +40,7 @@ export class TrackService {
   async update(id: string, dto: Omit<TrackModel, 'id'>) {
     const index = this.tracks.findIndex((user) => user.id === id);
     if (index === -1) throw new NotFoundException();
-    const track = this.tracks[index];
+
     this.tracks[index] = { id, ...dto };
 
     return { id, ...dto };
