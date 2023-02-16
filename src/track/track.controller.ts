@@ -10,6 +10,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { UpdateTracktDto } from './dto/update-track.dto';
+import { TrackEntity } from './track.entity';
 import { TrackModel } from './track.model';
 import { TrackService } from './track.service';
 
@@ -17,7 +18,7 @@ import { TrackService } from './track.service';
 export class TrackController {
   constructor(private readonly trackService: TrackService) {}
   @Post()
-  async create(@Body() dto: TrackModel) {
+  async create(@Body() dto: TrackEntity) {
     return await this.trackService.create(dto);
   }
 
@@ -34,7 +35,7 @@ export class TrackController {
   @Put(':id')
   async update(
     @Param('id', ParseUUIDPipe) id: string,
-    @Body() dto: UpdateTracktDto,
+    @Body() dto: TrackEntity,
   ) {
     return await this.trackService.update(id, dto);
   }
