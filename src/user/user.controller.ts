@@ -12,7 +12,6 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { CreateUserDto, UpdatePasswordDto } from './dto';
-import { UserModel } from './user.model';
 import { UserService } from './user.service';
 
 @Controller('user')
@@ -21,20 +20,19 @@ export class UserController {
   @UseInterceptors(ClassSerializerInterceptor)
   @Post()
   async create(@Body() dto: CreateUserDto) {
-    return new UserModel(await this.userService.create(dto));
+    return await this.userService.create(dto);
   }
 
   @UseInterceptors(ClassSerializerInterceptor)
   @Get()
   async findAll() {
-    return (await this.userService.findAll()).map(
-      (user) => new UserModel(user),
-    );
+    return await this.userService.findAll();
   }
+
   @UseInterceptors(ClassSerializerInterceptor)
   @Get(':id')
   async findOne(@Param('id', ParseUUIDPipe) id: string) {
-    return new UserModel(await this.userService.findOne(id));
+    return await this.userService.findOne(id);
   }
   @UseInterceptors(ClassSerializerInterceptor)
   @Put(':id')
@@ -42,7 +40,7 @@ export class UserController {
     @Param('id', ParseUUIDPipe) id: string,
     @Body() dto: UpdatePasswordDto,
   ) {
-    return new UserModel(await this.userService.update(id, dto));
+    return await this.userService.update(id, dto);
   }
 
   @Delete(':id')
