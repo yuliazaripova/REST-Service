@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { TrackModel } from './track.model';
 import { v4 as uuidv4 } from 'uuid';
-import { FavoritesService } from 'src/favorites/favorites.service';
+import { FavoritesService } from '../favorites/favorites.service';
 
 @Injectable()
 export class TrackService {

@@ -6,9 +6,9 @@ import {
 } from '@nestjs/common';
 import { ArtistModel } from './artist.model';
 import { v4 as uuidv4 } from 'uuid';
-import { TrackService } from 'src/track/track.service';
+import { TrackService } from '../track/track.service';
 import { UpdateArtistDto } from './dto/update-artist.dto';
-import { FavoritesService } from 'src/favorites/favorites.service';
+import { FavoritesService } from '../favorites/favorites.service';
 
 @Injectable()
 export class ArtistService {

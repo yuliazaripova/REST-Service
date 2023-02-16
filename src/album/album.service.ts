@@ -6,8 +6,8 @@ import {
 } from '@nestjs/common';
 import { AlbumModel } from './album.model';
 import { v4 as uuidv4 } from 'uuid';
-import { TrackService } from 'src/track/track.service';
-import { FavoritesService } from 'src/favorites/favorites.service';
+import { TrackService } from '../track/track.service';
+import { FavoritesService } from '../favorites/favorites.service';
 
 @Injectable()
 export class AlbumService {
