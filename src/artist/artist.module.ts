@@ -3,9 +3,11 @@ import { ArtistService } from './artist.service';
 import { ArtistController } from './artist.controller';
 import { TrackModule } from '../track/track.module';
 import { FavoritesModule } from '../favorites/favorites.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ArtistEntity } from './artist.entity';
 
 @Module({
-  imports: [TrackModule, forwardRef(() => FavoritesModule)],
+  imports: [ TypeOrmModule.forFeature([ ArtistEntity ])],
   providers: [ArtistService],
   controllers: [ArtistController],
   exports: [ArtistService],
