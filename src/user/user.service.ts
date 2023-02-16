@@ -4,8 +4,6 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { CreateUserDto } from './dto';
-import { UserModel } from './user.model';
-import { v4 as uuidv4 } from 'uuid';
 import { UpdatePasswordDto } from './dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from './user.entity';
