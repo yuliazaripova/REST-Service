@@ -21,11 +21,13 @@ export class ArtistService {
   ) {}
   async create(dto: ArtistEntity): Promise<ArtistEntity> {
     return await this.artistRepository.save({ ...dto });
-   
   }
 
   async findOne(id: string): Promise<ArtistEntity> {
-    const artist = await this.artistRepository.findOne({ where: { id } });
+    const artist = await this.artistRepository.findOne({
+      where: { id },
+  //    relations: ['tracks'],
+    });
     if (!artist) {
       throw new NotFoundException();
     }
@@ -46,7 +48,6 @@ export class ArtistService {
     await this.artistRepository.save({ id, ...dto });
     return await this.findOne(id);
   }
-
 
   // async create(dto: ArtistModel) {
   //   const artist = {

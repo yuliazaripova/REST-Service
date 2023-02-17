@@ -20,7 +20,7 @@ export class TrackService {
   ) {}
   async create(dto: TrackEntity): Promise<TrackEntity> {
     return await this.trackRepository.save({ ...dto });
-   
+    
   }
 
   async findOne(id: string): Promise<TrackEntity> {
@@ -45,8 +45,6 @@ export class TrackService {
     await this.trackRepository.save({ id, ...dto });
     return await this.findOne(id);
   }
-
- 
 
   // async create(dto: TrackModel) {
   //   const track = {
