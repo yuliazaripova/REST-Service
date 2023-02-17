@@ -6,6 +6,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
+import { AlbumEntity } from '../album/album.entity';
 
 @Entity('track')
 export class TrackEntity {
@@ -15,32 +16,8 @@ export class TrackEntity {
   @Column({ type: 'varchar', length: 300 })
   name: string;
 
-  // @ManyToOne(() => ArtistEntity, (artist) => artist.tracks, {
-  //   onDelete: 'SET NULL',
-  // })
-
-  // @Column({ type: 'uuid', nullable: true })
-  // artistId: string;
-
-  @Column({ type: 'uuid', nullable: true })
-  albumId: string;
-
   @Column({ type: 'int' })
   duration: number;
-
-  // @ManyToOne(() => ArtistEntity, (artist) => artist, {
-  //   onDelete: 'SET NULL',
-  //   createForeignKeyConstraints: false,
-  // })
-  // @JoinColumn()
-  // artist: ArtistEntity;
-
-  // @ManyToOne(() => ArtistEntity, (artist) => artist, {
-  //   onDelete: 'SET NULL',
-  //   // createForeignKeyConstraints: false,
-  // })
-  // @JoinColumn({ name: 'artistId' })
-  // artist: ArtistEntity;
 
   @ManyToOne(() => ArtistEntity, (artist) => artist.tracks, {
     cascade: true,
@@ -50,4 +27,13 @@ export class TrackEntity {
   artist: ArtistEntity;
   @Column('uuid', { nullable: true })
   artistId: string | null;
+
+  @ManyToOne(() => AlbumEntity, (album) => album.tracks, {
+    cascade: true,
+    onDelete: 'SET NULL',
+  })
+  @JoinColumn({ name: 'albumId' })
+  album: AlbumEntity;
+  @Column('uuid', { nullable: true })
+  albumId: string | null;
 }
