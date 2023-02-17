@@ -7,15 +7,18 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { AlbumEntity } from '../album/album.entity';
+import { IsNotEmpty } from 'class-validator';
 
 @Entity('track')
 export class TrackEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @IsNotEmpty()
   @Column({ type: 'varchar', length: 300 })
   name: string;
 
+  @IsNotEmpty()
   @Column({ type: 'int' })
   duration: number;
 
