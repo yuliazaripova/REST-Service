@@ -19,47 +19,52 @@ export class FavoritesController {
 
   @Post('track/:id')
   async addTrack(@Param('id', ParseUUIDPipe) id: string) {
-    return await this.favoritesService.create('track', id);
+    return await this.favoritesService.createTrack(id);
   }
 
   @Post('album/:id')
   async addAlbum(@Param('id', ParseUUIDPipe) id: string) {
-    return await this.favoritesService.create('album', id);
+    return await this.favoritesService.createAlbum(id);
   }
+
+  // @Post('album/:id')
+  // async addAlbum(@Param('id', ParseUUIDPipe) id: string) {
+  //   return await this.favoritesService.create('album', id);
+  // }
 
   @Post('artist/:id')
   async addArtist(@Param('id', ParseUUIDPipe) id: string) {
-    return await this.favoritesService.create('artist', id);
+    return await this.favoritesService.createArtist(id);
   }
 
   @Delete('track/:id')
   @HttpCode(204)
   async removeTrack(@Param('id', ParseUUIDPipe) id: string) {
-    return await this.favoritesService.remove('track', id);
+    return await this.favoritesService.deleteTrack(id);
   }
   @Delete('album/:id')
   @HttpCode(204)
   async removeAlbum(@Param('id', ParseUUIDPipe) id: string) {
-    return await this.favoritesService.remove('album', id);
+    return await this.favoritesService.deleteAlbum(id);
   }
   @Delete('artist/:id')
   @HttpCode(204)
   async removeArtist(@Param('id', ParseUUIDPipe) id: string) {
-    return await this.favoritesService.remove('artist', id);
+    return await this.favoritesService.deleteArtist(id);
   }
 
-  @Get('track/:id')
-  async findOneTrack(@Param('id', ParseUUIDPipe) id: string) {
-    return await this.favoritesService.findOne('track', id);
-  }
+  // @Get('track/:id')
+  // async findOneTrack(@Param('id', ParseUUIDPipe) id: string) {
+  //   return await this.favoritesService.findOne('track', id);
+  // }
 
-  @Get('album/:id')
-  async findOneAlbum(@Param('id', ParseUUIDPipe) id: string) {
-    return await this.favoritesService.findOne('album', id);
-  }
+  // @Get('album/:id')
+  // async findOneAlbum(@Param('id', ParseUUIDPipe) id: string) {
+  //   return await this.favoritesService.findOne('album', id);
+  // }
 
-  @Get('artist/:id')
-  async findOneArtist(@Param('id', ParseUUIDPipe) id: string) {
-    return await this.favoritesService.findOne('artist', id);
-  }
+  // @Get('artist/:id')
+  // async findOneArtist(@Param('id', ParseUUIDPipe) id: string) {
+  //   return await this.favoritesService.findOne('artist', id);
+  // }
 }

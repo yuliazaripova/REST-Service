@@ -1,11 +1,11 @@
-import { forwardRef, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { ArtistService } from './artist.service';
 import { ArtistController } from './artist.controller';
-import { TrackModule } from 'src/track/track.module';
-import { FavoritesModule } from 'src/favorites/favorites.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ArtistEntity } from './artist.entity';
 
 @Module({
-  imports: [TrackModule, forwardRef(() => FavoritesModule)],
+  imports: [TypeOrmModule.forFeature([ArtistEntity])],
   providers: [ArtistService],
   controllers: [ArtistController],
   exports: [ArtistService],

@@ -17,11 +17,26 @@ git clone {repository URL}
 npm install
 ```
 
-## Running application
+## Running application in docker
 
 ```
-npm start
+npm run start:docker-compose
 ```
+
+## And than after the containers starting
+```
+npm run migration:run
+```
+
+## You can scan vulnerabilities 
+Note: you should be log in to docker hub
+```
+npm run docker:scan
+```
+
+## Image on DockerHub: 
+https://hub.docker.com/repository/docker/ladypea/alpine/general
+
 
 After starting the app on port (4000 as default) you can open
 in your browser OpenAPI documentation by typing http://localhost:4000/doc/.

@@ -9,15 +9,14 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { ArtistModel } from './artist.model';
+import { ArtistEntity } from './artist.entity';
 import { ArtistService } from './artist.service';
-import { UpdateArtistDto } from './dto/update-artist.dto';
 
 @Controller('artist')
 export class ArtistController {
   constructor(private readonly artistService: ArtistService) {}
   @Post()
-  async create(@Body() dto: ArtistModel) {
+  async create(@Body() dto: ArtistEntity) {
     return await this.artistService.create(dto);
   }
 
@@ -34,7 +33,7 @@ export class ArtistController {
   @Put(':id')
   async update(
     @Param('id', ParseUUIDPipe) id: string,
-    @Body() dto: UpdateArtistDto,
+    @Body() dto: ArtistEntity,
   ) {
     return await this.artistService.update(id, dto);
   }
