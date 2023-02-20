@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 import { AlbumEntity } from '../album/album.entity';
 import { IsNotEmpty } from 'class-validator';
-import { TrackFavEntity } from '../favorites/track/trackFav.entity';
+import { TrackFavEntity } from '../favorites/favorites.entity';
 
 
 @Entity('track')

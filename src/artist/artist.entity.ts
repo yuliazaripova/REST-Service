@@ -5,8 +5,10 @@ import {
   Entity,
   OneToMany,
   JoinColumn,
+  OneToOne,
 } from 'typeorm';
 import { IsBoolean, IsString } from 'class-validator';
+import { ArtistFavEntity } from '../favorites/favorites.entity';
 
 @Entity('artist')
 export class ArtistEntity {
@@ -23,4 +25,7 @@ export class ArtistEntity {
 
   @OneToMany(() => TrackEntity, (track) => track.artist)
   tracks: TrackEntity[];
+
+  @OneToOne(() => ArtistFavEntity, favs => favs.artist, { onDelete: "CASCADE" })
+  artistFavs: ArtistFavEntity;
 }
