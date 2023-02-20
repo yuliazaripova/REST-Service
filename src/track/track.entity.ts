@@ -11,7 +11,6 @@ import { AlbumEntity } from '../album/album.entity';
 import { IsNotEmpty } from 'class-validator';
 import { TrackFavEntity } from '../favorites/favorites.entity';
 
-
 @Entity('track')
 export class TrackEntity {
   @PrimaryGeneratedColumn('uuid')
@@ -43,6 +42,6 @@ export class TrackEntity {
   @Column('uuid', { nullable: true })
   albumId: string | null;
 
-  @OneToOne(() => TrackFavEntity, favs => favs.track, { onDelete: "CASCADE" })
+  @OneToOne(() => TrackFavEntity, (favs) => favs.track, { onDelete: 'CASCADE' })
   favs: TrackFavEntity;
 }

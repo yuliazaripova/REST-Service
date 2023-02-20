@@ -10,9 +10,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { ArtistEntity } from './artist.entity';
-import { ArtistModel } from './artist.model';
 import { ArtistService } from './artist.service';
-import { UpdateArtistDto } from './dto/update-artist.dto';
 
 @Controller('artist')
 export class ArtistController {

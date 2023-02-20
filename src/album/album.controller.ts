@@ -10,9 +10,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { AlbumEntity } from './album.entity';
-import { AlbumModel } from './album.model';
 import { AlbumService } from './album.service';
-import { UpdateAlbumDto } from './dto/update-album.dto';
 
 @Controller('album')
 export class AlbumController {

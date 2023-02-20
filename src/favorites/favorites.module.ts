@@ -1,4 +1,4 @@
-import { forwardRef, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { FavoritesService } from './favorites.service';
 import { FavoritesController } from './favorites.controller';
 import { ArtistModule } from '../artist/artist.module';
@@ -17,11 +17,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     TrackModule,
     AlbumModule,
     ArtistModule,
-    // TrackFavoritesModule,
-
-    //   forwardRef(() => ArtistModule),
-    // forwardRef(() => TrackModule),
-    //   forwardRef(() => AlbumModule),
   ],
   providers: [FavoritesService],
   controllers: [FavoritesController],

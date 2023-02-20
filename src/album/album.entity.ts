@@ -1,6 +1,12 @@
-import { IsNumber, IsUUID } from 'class-validator';
+import { IsNumber } from 'class-validator';
 import { TrackEntity } from '../track/track.entity';
-import { PrimaryGeneratedColumn, Column, Entity, OneToMany, OneToOne } from 'typeorm';
+import {
+  PrimaryGeneratedColumn,
+  Column,
+  Entity,
+  OneToMany,
+  OneToOne,
+} from 'typeorm';
 import { AlbumFavEntity } from '../favorites/favorites.entity';
 
 @Entity('album')
@@ -21,6 +27,6 @@ export class AlbumEntity {
   @OneToMany(() => TrackEntity, (track) => track.album)
   tracks: TrackEntity[];
 
-  @OneToOne(() => AlbumFavEntity, favs => favs.album, { onDelete: "CASCADE" })
+  @OneToOne(() => AlbumFavEntity, (favs) => favs.album, { onDelete: 'CASCADE' })
   albumFavs: AlbumFavEntity;
 }
