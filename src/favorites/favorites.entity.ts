@@ -17,7 +17,7 @@ export class FavsEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 }
-@ChildEntity()
+@ChildEntity('trackFavs')
 export class TrackFavEntity extends FavsEntity {
   @Column()
   type: string;
@@ -31,7 +31,7 @@ export class TrackFavEntity extends FavsEntity {
   @Column('uuid', { nullable: true })
   trackId: string | null;
 }
-@ChildEntity()
+@ChildEntity('albumFavs')
 export class AlbumFavEntity extends FavsEntity {
   @Column()
   type: string;
@@ -46,7 +46,7 @@ export class AlbumFavEntity extends FavsEntity {
   albumId: string | null;
 }
 
-@ChildEntity()
+@ChildEntity('artistFavs')
 export class ArtistFavEntity extends FavsEntity {
   @Column()
   type: string;

@@ -18,7 +18,12 @@
     "test:auth": "cross-env TEST_MODE=auth jest --config ./test/jest-e2e.json",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand"
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "typeorm": "typeorm-ts-node-esm -d ormconfig.ts",
+    "create": "npx typeorm migration:create ./src/migration/Base",
+    "generate": "npm run typeorm -- migration:generate ./src/migration/Base",
+    "migration:run": "npm run typeorm -- migration:run",
+    "start:docker-compose": "docker-compose up --build"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
@@ -40,7 +45,7 @@
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
     "swagger-ui-express": "^4.6.0",
-    "typeorm": "^0.3.12",
+    "typeorm": "^0.3.11",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

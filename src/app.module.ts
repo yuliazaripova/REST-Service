@@ -9,10 +9,20 @@ import { FavoritesModule } from './favorites/favorites.module';
 import { UserModule } from './user/user.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm/dist';
+import { AlbumEntity } from './album/album.entity';
+import { ArtistEntity } from './artist/artist.entity';
+import {
+  TrackFavEntity,
+  AlbumFavEntity,
+  ArtistFavEntity,
+  FavsEntity,
+} from './favorites/favorites.entity';
+import { TrackEntity } from './track/track.entity';
+import { UserEntity } from './user/user.entity';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -24,26 +34,24 @@ import { TypeOrmModule } from '@nestjs/typeorm/dist';
         password: config.get<string>('POSTGRES_PASSWORD'),
         database: config.get<string>('POSTGRES_DB'),
         host: 'db',
-        entities: ['**/*.entity{.ts,.js}'],
-
-        migrationsTableName: 'migration',
-
+        entities: [
+          UserEntity,
+          ArtistEntity,
+          TrackEntity,
+          AlbumEntity,
+          TrackFavEntity,
+          AlbumFavEntity,
+          ArtistFavEntity,
+          FavsEntity,
+        ],
         migrations: ['src/migration/*.ts'],
-
-        cli: {
-          migrationsDir: 'src/migration',
-        },
-        autoLoadEntities: true,
-
-        logging: true,
-        synchronize: true,
       }),
     }),
     ArtistModule,
     TrackModule,
     AlbumModule,
     FavoritesModule,
-    //  TrackFavoritesModule,
+
     UserModule,
   ],
   controllers: [AppController],

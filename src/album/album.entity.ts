@@ -1,4 +1,4 @@
-import { IsNumber } from 'class-validator';
+import { IsNotEmpty, IsNumber } from 'class-validator';
 import { TrackEntity } from '../track/track.entity';
 import {
   PrimaryGeneratedColumn,
@@ -14,6 +14,7 @@ export class AlbumEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @IsNotEmpty()
   @Column({ type: 'varchar', length: 300 })
   name: string;
 

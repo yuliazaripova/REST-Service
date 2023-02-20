@@ -1,10 +1,10 @@
-FROM node:18.4.0-alpine
-
+FROM alpine:3.15
+RUN apk add --update nodejs npm
 WORKDIR /usr/src/app
 
 COPY package*.json ./
+RUN npm ci --omit=dev
 
-RUN npm install --production
 RUN npm install -g nodemon ts-node
 
 

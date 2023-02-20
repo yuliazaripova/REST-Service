@@ -16,11 +16,11 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
   node:
-    image: node:18.4.0-alpine
+    image: alpine:3.15
 
     volumes:
       - ./src:/usr/src/app/src
-      
+
       - logs:/usr/logs
 
     depends_on:
