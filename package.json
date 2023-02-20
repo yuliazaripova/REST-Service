@@ -23,7 +23,8 @@
     "create": "npx typeorm migration:create ./src/migration/Base",
     "generate": "npm run typeorm -- migration:generate ./src/migration/Base",
     "migration:run": "npm run typeorm -- migration:run",
-    "start:docker-compose": "docker-compose up --build"
+    "start:docker-compose": "docker-compose up --build",
+    "docker:scan": " docker scan alpine:3.15"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
