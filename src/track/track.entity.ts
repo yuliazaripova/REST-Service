@@ -5,9 +5,12 @@ import {
   Entity,
   ManyToOne,
   JoinColumn,
+  OneToOne,
 } from 'typeorm';
 import { AlbumEntity } from '../album/album.entity';
 import { IsNotEmpty } from 'class-validator';
+import { TrackFavEntity } from '../favorites/track/trackFav.entity';
+
 
 @Entity('track')
 export class TrackEntity {
@@ -39,4 +42,7 @@ export class TrackEntity {
   album: AlbumEntity;
   @Column('uuid', { nullable: true })
   albumId: string | null;
+
+  @OneToOne(() => TrackFavEntity, favs => favs.track, { onDelete: "CASCADE" })
+  favs: TrackFavEntity;
 }

@@ -43,6 +43,7 @@ import { TypeOrmModule } from '@nestjs/typeorm/dist';
     TrackModule,
     AlbumModule,
     FavoritesModule,
+  //  TrackFavoritesModule,
     UserModule,
   ],
   controllers: [AppController],

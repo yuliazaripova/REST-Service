@@ -8,7 +8,12 @@ import { TrackEntity } from './track.entity';
 import { TrackService } from './track.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([TrackEntity]), ArtistModule, AlbumModule],
+  imports: [
+    TypeOrmModule.forFeature([TrackEntity]),
+    ArtistModule,
+    AlbumModule,
+  //  FavoritesModule,
+  ],
   controllers: [TrackController],
   providers: [TrackService],
   exports: [TrackService],
